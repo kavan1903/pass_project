@@ -55,22 +55,21 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'pass_project.wsgi.application'
 
-# ✅ Database for local (MySQL) — comment this when deploying
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'raasfiesta',
-#         'USER': 'root',
-#         'PASSWORD': os.getenv('DB_PASSWORD', 'Kavan@123'),
-#         'HOST': 'localhost',
-#         'PORT': '3306',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'raasfiesta',
+        'USER': 'root',
+        'PASSWORD': os.getenv('DB_PASSWORD', 'Kavan@123'),
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }
+}
 
 # ✅ For deployment: Use SQLite or auto-detect PostgreSQL from environment
-DATABASES = {
-    'default': dj_database_url.config(default='sqlite:///db.sqlite3')
-}
+# DATABASES = {
+#     'default': dj_database_url.config(default='sqlite:///db.sqlite3')
+# }
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
