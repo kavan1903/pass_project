@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Invoice
 from .forms import InvoiceForm
 
+def home(request):
+    return render(request, 'home.html')  # Create a template named 'home.html'
+
 def create_invoice(request):
     if request.method == 'POST':
         form = InvoiceForm(request.POST)
