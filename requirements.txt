@@ -2,4 +2,4 @@ Django>=4.2
 gunicorn
 dj-database-url
 whitenoise
-psycopg2-binary  # if you're using PostgreSQL
+mysqlclient  # Add this line for MySQL
