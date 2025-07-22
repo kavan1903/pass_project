@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{% comment %} <!DOCTYPE html>
 <html>
 <head>
     <title>Raas Fiesta Invoice</title>
@@ -38,6 +38,70 @@
                 <li>Keep your ID proof ready.</li>
             </ul>
             <p>✅ Your payment is secure with Raas Fiesta.</p>
+        </div>
+    </div>
+</body>
+</html> {% endcomment %}
+
+<!-- templates/invoice.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Raas Fiesta - Invoice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            color: #333;
+        }
+        .invoice-box {
+            max-width: 700px;
+            margin: auto;
+            padding: 30px;
+            border: 2px solid #f0f0f0;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #C62828;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+        }
+        td {
+            padding: 8px;
+        }
+        .label {
+            font-weight: bold;
+            width: 30%;
+        }
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="invoice-box">
+        <h1>🎟️ Raas Fiesta Pass Invoice</h1>
+        <table>
+            <tr><td class="label">Customer Name:</td><td>{{ invoice.customer_name }}</td></tr>
+            <tr><td class="label">Phone:</td><td>{{ invoice.phone }}</td></tr>
+            <tr><td class="label">Email:</td><td>{{ invoice.email }}</td></tr>
+            <tr><td class="label">Number of Passes:</td><td>{{ invoice.passes }}</td></tr>
+            <tr><td class="label">Total Amount:</td><td>₹{{ invoice.amount }}</td></tr>
+            <tr><td class="label">Venue:</td><td>{{ invoice.venue }}</td></tr>
+            <tr><td class="label">Date:</td><td>{{ invoice.created_at|date:"d M Y, h:i A" }}</td></tr>
+            <tr><td class="label">Pass Link:</td><td><a href="{{ request.build_absolute_uri }}">View Online</a></td></tr>
+        </table>
+
+        <div class="footer">
+            Thank you for booking! <br>
+            Please keep this invoice safe and show it at the venue. <br>
+            📞 Contact us for any help.
         </div>
     </div>
 </body>
