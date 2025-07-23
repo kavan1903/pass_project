@@ -9,3 +9,8 @@ services:
         value: pass_project.settings
       - key: PYTHON_VERSION
         value: 3.11
+
+databases:
+  - name: raasfiesta         # This must match the name in Render dashboard
+    databaseName: pass_db    # This is the actual DB name used in PostgreSQL (can stay as is)
+    user: pass_user          # Keep this as is, unless you've customized it
