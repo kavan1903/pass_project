@@ -3,3 +3,5 @@ gunicorn
 dj-database-url
 whitenoise
 mysqlclient  # Add this line for MySQL
+dj-database-url
+psycopg2-binary

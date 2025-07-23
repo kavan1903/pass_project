@@ -1,43 +1,86 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Raas Fiesta Invoice</title>
+    <meta charset="UTF-8">
+    <title>Raas Fiesta - Invoice</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background: #f7f7f7; padding: 30px; }
-        .container {
-            background: white;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
-            max-width: 500px;
-            margin: auto;
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f9f9f9;
+            margin: 0;
+            padding: 30px;
         }
-        h1 { color: #e91e63; }
-        .details p { margin: 8px 0; font-size: 16px; }
-        .footer { margin-top: 20px; font-size: 12px; color: gray; }
+        .invoice-box {
+            background: #fff;
+            max-width: 700px;
+            margin: auto;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 0 25px rgba(0,0,0,0.05);
+            border-left: 5px solid #c2185b;
+        }
+        h1 {
+            color: #c2185b;
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        h2 {
+            color: #555;
+            font-size: 18px;
+            margin-bottom: 25px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        td {
+            padding: 10px;
+            vertical-align: top;
+        }
+        .label {
+            font-weight: 600;
+            width: 40%;
+            color: #333;
+        }
+        .value {
+            color: #444;
+        }
+        .footer {
+            margin-top: 40px;
+            font-size: 0.9em;
+            color: #888;
+            text-align: center;
+        }
+        a {
+            color: #c2185b;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="invoice-box">
         <h1>🎟️ Raas Fiesta</h1>
-        <h2>Pass Purchase Confirmation</h2>
-        <div class="details">
-            <p><strong>Customer:</strong> {{ invoice.customer_name }}</p>
-            <p><strong>Phone:</strong> {{ invoice.phone }}</p>
-            <p><strong>Passes:</strong> {{ invoice.passes }}</p>
-            <p><strong>Venue:</strong> {{ invoice.venue }}</p>
-            <p><strong>Amount Paid:</strong> ₹{{ invoice.amount }}</p>
-            <p><strong>Date:</strong> {{ invoice.created_at|date:"d M Y, h:i A" }}</p>
-        </div>
-        <hr>
+        <h2>Pass Purchase Invoice</h2>
+
+        <table>
+            <tr><td class="label">Customer Name:</td><td class="value">{{ invoice.customer_name }}</td></tr>
+            <tr><td class="label">Phone:</td><td class="value">{{ invoice.phone }}</td></tr>
+            <tr><td class="label">Email:</td><td class="value">{{ invoice.email }}</td></tr>
+            <tr><td class="label">Number of Passes:</td><td class="value">{{ invoice.passes }}</td></tr>
+            <tr><td class="label">Venue:</td><td class="value">{{ invoice.venue }}</td></tr>
+            <tr><td class="label">Total Amount:</td><td class="value">₹{{ invoice.amount }}</td></tr>
+            <tr><td class="label">Amount Paid:</td><td class="value">₹{{ invoice.paid_amount }}</td></tr>
+            <tr><td class="label">Remaining Amount:</td><td class="value">₹{{ remaining_amount }}</td></tr>
+            <tr><td class="label">Payment Mode:</td><td class="value">{{ invoice.payment_mode }}</td></tr>
+            <tr><td class="label">Payment Status:</td><td class="value">{{ invoice.payment_status }}</td></tr>
+            <tr><td class="label">Date:</td><td class="value">{{ invoice.created_at|date:"d M Y, h:i A" }}</td></tr>
+        </table>
+
         <div class="footer">
-            <p><strong>Terms & Conditions:</strong></p>
-            <ul>
-                <li>Passes are non-refundable.</li>
-                <li>Show this invoice at counter for collection.</li>
-                <li>Keep your ID proof ready.</li>
-            </ul>
-            <p>✅ Your payment is secure with Raas Fiesta.</p>
+            Thank you for choosing Raas Fiesta!<br>
+            Show this invoice at the venue counter. 🎉<br>
+            Need help? Contact us anytime.
         </div>
     </div>
 </body>

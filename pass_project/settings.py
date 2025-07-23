@@ -66,13 +66,28 @@ WSGI_APPLICATION = 'pass_project.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
+import os
+import dj_database_url
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# If DATABASE_URL is set (on Render), dj_database_url will parse it;
+# otherwise it falls back to using a local SQLite file.
+DATABASES = {
+    'default': dj_database_url.config(
+        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
+        conn_max_age=600,        # keep connections open for performance
+        ssl_require=False        # set to True on production if you need SSL
+    )
+}
 # ✅ For deployment: Use SQLite or auto-detect PostgreSQL from environment
 # DATABASES = {
 #     'default': dj_database_url.config(default='sqlite:///db.sqlite3')
@@ -96,8 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Language and time
 LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
-USE_I18N = True
+TIME_ZONE = 'Asia/Kolkata'
 USE_TZ = True
 
 # ✅ Static files (dev + prod)
@@ -114,3 +128,6 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'malharexoticaa@gmail.com')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', 'dxzrofmzitovcyhs')
+
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/home' 

@@ -1,63 +1,310 @@
-<!DOCTYPE html>
-<html>
+{% comment %} <!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Create Pass - Raas Fiesta</title>
+    <meta charset="UTF-8">
+    <title>Create Navratri Pass Invoice</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link 
+        rel="stylesheet" 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
     <style>
         body {
+            background: linear-gradient(to right, #ffe6f0, #fbeaff, #e8eaf6);
             font-family: 'Segoe UI', sans-serif;
-            background: #f7f7f7;
-            padding: 40px;
         }
-        .form-container {
-            background: white;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
-            max-width: 500px;
-            margin: auto;
-        }
-        h2 {
-            color: #e91e63;
-            text-align: center;
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-        label {
-            margin-top: 15px;
-            font-weight: 500;
-        }
-        input, select {
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            margin-top: 5px;
-        }
-        button {
-            margin-top: 25px;
-            padding: 12px;
-            background-color: #e91e63;
-            color: white;
-            font-size: 16px;
+
+        .card {
             border: none;
-            border-radius: 5px;
-            cursor: pointer;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
-        button:hover {
-            background-color: #d81b60;
+
+        .card-header {
+            background-color: #d32f2f;
+            color: white;
+            font-weight: 600;
+            font-size: 1.3rem;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        .form-label {
+            font-weight: 500;
+            color: #555;
+        }
+
+        .form-check {
+            margin-right: 15px;
+        }
+
+        .btn-danger {
+            background-color: #c2185b;
+            border: none;
+            transition: 0.3s ease-in-out;
+        }
+
+        .btn-danger:hover {
+            background-color: #ad1457;
+        }
+
+        @media (max-width: 576px) {
+            .form-check-inline {
+                display: block;
+                margin-bottom: 8px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="form-container">
-        <h2>📝 Generate Your Pass</h2>
-        <form method="POST">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Generate Pass</button>
-        </form>
+
+<div class="container py-5">
+    <div class="card mx-auto" style="max-width: 700px;">
+        <div class="card-header text-center">
+            🎉 Create Navratri Pass Invoice
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Customer Name</label>
+                        {{ form.customer_name }}
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Phone</label>
+                        {{ form.phone }}
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Email</label>
+                        {{ form.email }}
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Passes</label>
+                        {{ form.passes }}
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Amount</label>
+                        {{ form.amount }}
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Amount Paid</label>
+                        {{ form.paid_amount }}
+                    </div>
+                    <div class="col-md-12">
+                        <label class="form-label">Venue</label>
+                        {{ form.venue }}
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="form-label d-block">Payment Mode</label>
+                        {% for radio in form.payment_mode %}
+                            <div class="form-check form-check-inline">
+                                {{ radio.tag }} {{ radio.choice_label }}
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="form-label d-block">Payment Status</label>
+                        {% for radio in form.payment_status %}
+                            <div class="form-check form-check-inline">
+                                {{ radio.tag }} {{ radio.choice_label }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-danger w-100">Generate Invoice</button>
+                </div>
+
+            </form>
+        </div>
     </div>
+</div>
+
+<script 
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
+</script>
+</body>
+</html> {% endcomment %}
+
+<!-- templates/create_invoice.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Navratri Pass Invoice</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link 
+        rel="stylesheet" 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background: linear-gradient(to right, #ffe6f0, #fbeaff, #e8eaf6);
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            background-color: #d32f2f;
+            color: white;
+            font-weight: 600;
+            font-size: 1.3rem;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        .form-label {
+            font-weight: 500;
+            color: #555;
+        }
+
+        .form-check {
+            margin-right: 15px;
+        }
+
+        .btn-danger {
+            background-color: #c2185b;
+            border: none;
+            transition: 0.3s ease-in-out;
+        }
+
+        .btn-danger:hover {
+            background-color: #ad1457;
+        }
+
+        .text-danger {
+            font-size: 0.875rem;
+        }
+
+        @media (max-width: 576px) {
+            .form-check-inline {
+                display: block;
+                margin-bottom: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container py-5">
+    <div class="card mx-auto" style="max-width: 700px;">
+        <div class="card-header text-center">
+            🎉 Create Navratri Pass Invoice
+        </div>
+        <div class="card-body">
+            <form method="post" novalidate>
+                {% csrf_token %}
+                <div class="row g-3">
+                    {% for field in form.visible_fields %}
+                        <div class="col-md-6 {% if field.name in 'venue payment_mode payment_status' %}col-md-12{% endif %}">
+                            <label class="form-label">{{ field.label }}</label>
+                            {{ field }}
+                            {% if field.errors %}
+                                <div class="text-danger">
+                                    {{ field.errors.as_text|striptags }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-danger w-100">Generate Invoice</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script 
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const phoneField = document.querySelector('input[name="phone"]');
+    const emailField = document.querySelector('input[name="email"]');
+    const paidField = document.querySelector('input[name="paid_amount"]');
+    const amountField = document.querySelector('input[name="amount"]');
+    const passesField = document.querySelector('input[name="passes"]');
+
+    const digitOnlyFields = [phoneField, paidField, amountField, passesField];
+
+    const showError = (input, message) => {
+        let errorElem = input.parentElement.querySelector('.text-danger.js-error');
+        if (!errorElem) {
+            errorElem = document.createElement('div');
+            errorElem.className = 'text-danger js-error';
+            input.parentElement.appendChild(errorElem);
+        }
+        errorElem.textContent = message;
+        input.classList.add('is-invalid');
+    };
+
+    const clearError = (input) => {
+        const errorElem = input.parentElement.querySelector('.text-danger.js-error');
+        if (errorElem) errorElem.remove();
+        input.classList.remove('is-invalid');
+    };
+
+    // 🔒 Prevent letters in digit-only fields
+    digitOnlyFields.forEach(field => {
+        field.addEventListener('input', () => {
+            const cleaned = field.value.replace(/[^\d]/g, '');
+            if (field.value !== cleaned) {
+                field.value = cleaned;
+            }
+        });
+    });
+
+    // 📱 Phone: must be exactly 10 digits
+    phoneField.addEventListener('input', () => {
+        const val = phoneField.value.trim();
+        if (val.length !== 10) {
+            showError(phoneField, 'Phone must be exactly 10 digits.');
+        } else {
+            clearError(phoneField);
+        }
+    });
+
+    // 📧 Email Validation
+    emailField.addEventListener('input', () => {
+        const val = emailField.value.trim();
+        const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+        if (!isValid) {
+            showError(emailField, 'Enter a valid email address.');
+        } else {
+            clearError(emailField);
+        }
+    });
+
+    // 💸 Paid must not exceed Total
+    const validateAmount = () => {
+        const total = parseInt(amountField.value);
+        const paid = parseInt(paidField.value);
+
+        if (!isNaN(total) && !isNaN(paid)) {
+            if (paid > total) {
+                showError(paidField, `Paid amount (₹${paid}) cannot exceed total amount (₹${total}).`);
+            } else {
+                clearError(paidField);
+            }
+        }
+    };
+
+    paidField.addEventListener('input', validateAmount);
+    amountField.addEventListener('input', validateAmount);
+});
+</script>
+
 </body>
 </html>
