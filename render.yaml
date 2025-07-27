@@ -2,15 +2,12 @@ services:
   - type: web
     name: pass-project
     env: python
-    buildCommand: "pip install -r requirements.txt"
-    startCommand: "gunicorn pass_project.wsgi"
+    buildCommand: |
+      pip install -r requirements.txt
+      python manage.py migrate  # ✅ This line ensures migrations are run during build
+    startCommand: gunicorn pass_project.wsgi
     envVars:
       - key: DJANGO_SETTINGS_MODULE
         value: pass_project.settings
       - key: PYTHON_VERSION
         value: 3.11
-
-databases:
-  - name: raasfiesta         # This must match the name in Render dashboard
-    databaseName: pass_db    # This is the actual DB name used in PostgreSQL (can stay as is)
-    user: pass_user          # Keep this as is, unless you've customized it
